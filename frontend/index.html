@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RecoverAI — AI Revenue Recovery Platform</title>
+  <meta name="description" content="Intelligent, Policy-Bounded Action-Conditioned Payment Recovery Platform for Razorpay" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- Navigation / Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">RecoverAI <span class="badge-track">Track 03: AI Revenue Recovery</span></div>
+          <div class="brand-subtitle">Razorpay AI Buildathon — Autonomous Policy-Bounded Revenue Engine</div>
+        </div>
+      </div>
+      <div class="header-badges">
+        <span class="badge badge-testmode">
+          <span class="pulse-dot"></span> Razorpay TEST MODE Only
+        </span>
+        <span class="badge badge-synthetic">
+          Synthetic Simulator Cohort
+        </span>
+      </div>
+    </header>
+
+    <!-- Synthetic Disclaimer Alert -->
+    <div class="alert-banner">
+      <div class="alert-icon">ℹ</div>
+      <div class="alert-text">
+        <strong>Evaluation Disclaimer:</strong> Baseline and ML recovery metrics are computed on the 3,000 held-out test cohort from <code>recovery-simulator-v2</code>. All Razorpay operations are isolated to Test Mode; no live customer money is moved.
+      </div>
+    </div>
+
+    <!-- Top KPI Grid -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-title">Amount at Risk (Test)</div>
+        <div class="kpi-value" id="kpi-amount-risk">₹6,073,213.32</div>
+        <div class="kpi-subtext">3,000 Failed Transactions</div>
+      </div>
+      <div class="kpi-card highlight">
+        <div class="kpi-title">ML Recovered Revenue</div>
+        <div class="kpi-value highlight-text" id="kpi-recovered-revenue">₹3,531,916.62</div>
+        <div class="kpi-subtext">Recovery Rate: <strong id="kpi-recovery-rate">56.87%</strong></div>
+      </div>
+      <div class="kpi-card success">
+        <div class="kpi-title">Net ML Revenue Lift</div>
+        <div class="kpi-value success-text" id="kpi-revenue-lift">+₹109,335.24</div>
+        <div class="kpi-subtext"><span class="badge-lift">+3.19% Lift</span> vs Baseline Heuristic</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Baseline Benchmark</div>
+        <div class="kpi-value" id="kpi-baseline-revenue">₹3,422,581.38</div>
+        <div class="kpi-subtext">Heuristic Policy Rate: <strong>55.30%</strong></div>
+      </div>
+    </section>
+
+    <!-- Main Workspace (Interactive Recovery Engine) -->
+    <div class="workspace-grid">
+      <!-- Left Column: Case Input & Dispatch Controls -->
+      <section class="panel panel-input">
+        <div class="panel-header">
+          <h2>Recovery Opportunity Dispatcher</h2>
+          <span class="panel-badge">Inference & Policy</span>
+        </div>
+
+        <div class="preset-selector">
+          <label>Load Demonstration Scenario:</label>
+          <div class="preset-buttons">
+            <button class="btn-preset active" data-preset="transient">Scenario A: Transient Timeout</button>
+            <button class="btn-preset" data-preset="funds">Scenario B: Insufficient Funds</button>
+            <button class="btn-preset" data-preset="highvalue">Scenario C: High Value (₹75k)</button>
+            <button class="btn-preset" data-preset="retrylimit">Scenario D: Max Retries Blocked</button>
+          </div>
+        </div>
+
+        <form id="recovery-form" class="form-grid">
+          <div class="form-group">
+            <label for="recovery_case_id">Case Identifier</label>
+            <input type="text" id="recovery_case_id" value="CASE-DEMO-20260401" />
+          </div>
+
+          <div class="form-group">
+            <label for="amount_at_risk">Amount at Risk (INR)</label>
+            <input type="number" id="amount_at_risk" value="2500" step="10" min="10" />
+          </div>
+
+          <div class="form-group">
+            <label for="failure_reason">Failure Reason</label>
+            <select id="failure_reason">
+              <option value="BANK_TIMEOUT">BANK_TIMEOUT (Transient)</option>
+              <option value="GATEWAY_TIMEOUT">GATEWAY_TIMEOUT (Transient)</option>
+              <option value="NETWORK_ERROR">NETWORK_ERROR (Transient)</option>
+              <option value="TEMPORARY_BANK_ERROR">TEMPORARY_BANK_ERROR (Transient)</option>
+              <option value="INSUFFICIENT_FUNDS">INSUFFICIENT_FUNDS (Customer Action)</option>
+              <option value="CARD_EXPIRED">CARD_EXPIRED (Customer Action)</option>
+              <option value="INVALID_PAYMENT_DETAILS">INVALID_PAYMENT_DETAILS (Customer Action)</option>
+              <option value="PAYMENT_METHOD_DECLINED">PAYMENT_METHOD_DECLINED (Customer Action)</option>
+              <option value="AMBIGUOUS_FAILURE">AMBIGUOUS_FAILURE (Review Escalation)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="payment_method">Payment Rail</label>
+            <select id="payment_method">
+              <option value="UPI">UPI</option>
+              <option value="CARD">CARD</option>
+              <option value="NETBANKING">NETBANKING</option>
+              <option value="WALLET">WALLET</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="customer_segment">Customer Segment</label>
+            <select id="customer_segment">
+              <option value="VIP">VIP</option>
+              <option value="NORMAL" selected>NORMAL</option>
+              <option value="FREQUENT_FAILER">FREQUENT_FAILER</option>
+              <option value="HIGH_VALUE">HIGH_VALUE</option>
+              <option value="INFREQUENT">INFREQUENT</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="retry_count">Current Retry Count</label>
+            <input type="number" id="retry_count" value="0" min="0" max="10" />
+          </div>
+
+          <div class="form-group full-width">
+            <div class="toggle-group">
+              <label class="toggle-label">
+                <input type="checkbox" id="cooldown_eligible" checked />
+                <span>Cooldown Window Cleared</span>
+              </label>
+              <label class="toggle-label">
+                <input type="checkbox" id="human_review_required" />
+                <span>Escalation Flag Required</span>
+              </label>
+              <label class="toggle-label">
+                <input type="checkbox" id="simulate_failure" />
+                <span>Simulate Gateway Failure</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-actions full-width">
+            <button type="button" id="btn-recommend" class="btn btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              Dry Run (Recommend)
+            </button>
+            <button type="button" id="btn-execute" class="btn btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              Execute (Razorpay Test Mode)
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Right Column: ML Expected-Value Ranking & Policy Decision -->
+      <section class="panel panel-output">
+        <div class="panel-header">
+          <h2>AI Decision & Policy Engine</h2>
+          <span id="decision-status-badge" class="badge badge-idle">Ready</span>
+        </div>
+
+        <div id="output-container" class="output-content">
+          <!-- Default placeholder -->
+          <div class="empty-state" id="empty-state">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <p>Select a scenario preset and click <strong>Dry Run</strong> or <strong>Execute</strong> to inspect ML candidate ranking, PolicyEngine checks, and execution results.</p>
+          </div>
+
+          <!-- Active Decision View -->
+          <div id="results-view" style="display: none;">
+            <!-- Selected Action Banner -->
+            <div class="decision-banner" id="decision-banner">
+              <div class="decision-main">
+                <span class="decision-label">Selected Policy-Approved Action:</span>
+                <span class="decision-action" id="res-selected-action">RETRY</span>
+              </div>
+              <div class="decision-meta">
+                <span id="res-policy-status" class="policy-tag approved">Policy Approved</span>
+                <span id="res-expected-val" class="expected-val-tag">E[Val]: ₹0.00</span>
+              </div>
+            </div>
+
+            <!-- Policy Guardrail Verification -->
+            <div class="result-block">
+              <h3>Policy Engine Guardrails</h3>
+              <div id="policy-reasons-list" class="policy-reasons"></div>
+              <div id="blocked-actions-list" class="blocked-actions"></div>
+            </div>
+
+            <!-- 5 Candidate Expected Value Rankings -->
+            <div class="result-block">
+              <h3>5-Action Candidate Ranking (Calibrated ML Model)</h3>
+              <div id="ranking-bars" class="ranking-bars"></div>
+            </div>
+
+            <!-- Explainability / Reasoning -->
+            <div class="result-block">
+              <h3>Decision Explainability</h3>
+              <ul id="explain-reasons" class="explain-list"></ul>
+            </div>
+
+            <!-- Execution Status & Razorpay Outcome -->
+            <div class="result-block execution-box" id="exec-box">
+              <h3>Execution Result (Razorpay Test Mode)</h3>
+              <div class="exec-details">
+                <div><strong>Status:</strong> <span id="exec-status" class="exec-badge">DRY_RUN</span></div>
+                <div><strong>Reference / Order ID:</strong> <span id="exec-ref" class="mono">-</span></div>
+                <div id="exec-link-container" style="display:none;"><strong>Payment Link:</strong> <a id="exec-link-url" href="#" target="_blank" class="rzp-link">Open Test Link ↗</a></div>
+                <div><strong>Message:</strong> <span id="exec-msg">-</span></div>
+              </div>
+            </div>
+
+            <!-- Audit Trail Timeline -->
+            <div class="result-block">
+              <h3>Immutable Audit Trail</h3>
+              <div id="audit-timeline" class="audit-timeline"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Safety & Failure Demonstration Features -->
+    <section class="safety-section">
+      <div class="section-title">
+        <h2>Built-in Enterprise Safety Guardrails</h2>
+        <p>RecoverAI enforces deterministic operational constraints over ML recommendations to guarantee bounded execution.</p>
+      </div>
+      <div class="safety-grid">
+        <div class="safety-card">
+          <div class="safety-num">01</div>
+          <h4>Retry Limits & Cooldowns</h4>
+          <p>Maximum 2 automatic retries. Non-transient errors (e.g. Card Expired) are blocked from retry and rerouted to Payment Links.</p>
+        </div>
+        <div class="safety-card">
+          <div class="safety-num">02</div>
+          <h4>Autonomy Amount Thresholds</h4>
+          <p>Automatic recovery actions capped at ₹25,000. Tickets exceeding limits or with repeated failures escalate to Human Review.</p>
+        </div>
+        <div class="safety-card">
+          <div class="safety-num">03</div>
+          <h4>Strict Idempotency</h4>
+          <p>Cryptographic request tokens prevent double-charges and duplicate customer communication during retry loops.</p>
+        </div>
+        <div class="safety-card">
+          <div class="safety-num">04</div>
+          <h4>Isolated Test Mode Adapter</h4>
+          <p>Zero real-money risk. Isolated Razorpay test adapter gracefully catches gateway errors, timeouts, and network outages.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p><strong>RecoverAI — AI Revenue Recovery System</strong> | Razorpay AI Buildathon (Track 03)</p>
+      <p class="footer-sub">Synthetic Simulator Version: <code>recovery-simulator-v2</code> (Seed: 20260401) | FastAPI + Calibrated HistGradientBoosting + PolicyEngine</p>
+    </footer>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

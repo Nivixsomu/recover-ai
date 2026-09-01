@@ -1,0 +1,266 @@
+{
+  "dataset_summary": {
+    "train_cases": 14000,
+    "validation_cases": 3000,
+    "test_cases": 3000,
+    "total_amount_at_risk_test": 6073213.32
+  },
+  "phase_6c_logistic_regression": {
+    "validation_metrics": {
+      "accuracy": 0.6633333333333333,
+      "precision": 0.6493765586034913,
+      "recall": 0.8091982597886886,
+      "f1": 0.7205312672938572,
+      "roc_auc": 0.7123964364718767,
+      "pr_auc": 0.6935053750918038,
+      "brier_score": 0.20836251861353458,
+      "log_loss": 0.6028589229051589,
+      "ece": 0.02527366625937066,
+      "mean_predicted_prob": 0.5176875325383367,
+      "observed_success_rate": 0.5363333333333333,
+      "total_amount_at_risk": 6581966.01,
+      "expected_recovered_revenue": 3445423.523651399,
+      "observed_recovered_revenue": 3669382.34
+    },
+    "test_metrics": {
+      "accuracy": 0.6706666666666666,
+      "precision": 0.6610657705232837,
+      "recall": 0.8300180831826401,
+      "f1": 0.7359700694815606,
+      "roc_auc": 0.7269978815302068,
+      "pr_auc": 0.7208667967872705,
+      "brier_score": 0.20268169138412714,
+      "log_loss": 0.589644264536951,
+      "ece": 0.0374642260935773,
+      "mean_predicted_prob": 0.5305364261961586,
+      "observed_success_rate": 0.553,
+      "total_amount_at_risk": 6073213.32,
+      "expected_recovered_revenue": 3220051.1457400164,
+      "observed_recovered_revenue": 3422581.38
+    }
+  },
+  "phase_6d_hist_gradient_boosting": {
+    "validation_metrics": {
+      "accuracy": 0.67,
+      "precision": 0.6540567446490791,
+      "recall": 0.8166563082660038,
+      "f1": 0.7263681592039801,
+      "roc_auc": 0.7196867101347159,
+      "pr_auc": 0.7146473588584057,
+      "brier_score": 0.2063696420726119,
+      "log_loss": 0.597848828565387,
+      "ece": 0.017323611485153927,
+      "mean_predicted_prob": 0.5226900004474493,
+      "observed_success_rate": 0.5363333333333333,
+      "total_amount_at_risk": 6581966.01,
+      "expected_recovered_revenue": 3452325.9848087775,
+      "observed_recovered_revenue": 3669382.34
+    },
+    "test_metrics": {
+      "accuracy": 0.6896666666666667,
+      "precision": 0.6753371868978806,
+      "recall": 0.8450874020494273,
+      "f1": 0.7507362784471219,
+      "roc_auc": 0.7379390385931885,
+      "pr_auc": 0.7513706089782213,
+      "brier_score": 0.19912493447595067,
+      "log_loss": 0.5803509209009681,
+      "ece": 0.022418149069035363,
+      "mean_predicted_prob": 0.5358724939319206,
+      "observed_success_rate": 0.553,
+      "total_amount_at_risk": 6073213.32,
+      "expected_recovered_revenue": 3263089.1894745505,
+      "observed_recovered_revenue": 3422581.38
+    }
+  },
+  "phase_6e_calibration": {
+    "uncalibrated_val_brier": 0.2063696420726119,
+    "isotonic_val_brier": 0.20605195991736672,
+    "sigmoid_val_brier": 0.2060328019095943,
+    "selected_model": "Calibrated_HistGradientBoosting_Sigmoid"
+  },
+  "phase_6g_business_evaluation_test": {
+    "total_opportunities": 3000,
+    "total_amount_at_risk": 6073213.32,
+    "baseline_policy": {
+      "recovered_revenue": 3422581.38,
+      "recovery_rate": 0.553,
+      "expected_recovered_revenue": 3275224.158893477,
+      "action_distribution": {
+        "RETRY": 37.2,
+        "PAYMENT_LINK": 35.13333333333333,
+        "NO_ACTION": 12.966666666666669,
+        "REMINDER": 10.233333333333333,
+        "HUMAN_REVIEW": 4.466666666666667
+      }
+    },
+    "ml_policy": {
+      "recovered_revenue": 3531916.62,
+      "recovery_rate": 0.5686666666666667,
+      "expected_recovered_revenue": 4417053.958894853,
+      "action_distribution": {
+        "HUMAN_REVIEW": 64.13333333333333,
+        "RETRY": 32.83333333333333,
+        "REMINDER": 2.4,
+        "PAYMENT_LINK": 0.6333333333333333
+      }
+    },
+    "oracle": {
+      "potential_recovered_revenue": 4246431.6,
+      "potential_recovery_rate": 0.6916666666666667
+    },
+    "revenue_lift": {
+      "absolute_inr": 109335.24000000022,
+      "relative_percentage": 3.1945256477729167
+    },
+    "subgroup_recovery_rates": {
+      "by_failure_reason": {
+        "AMBIGUOUS_FAILURE": {
+          "baseline_rate": 0.4435146443514644,
+          "ml_rate": 0.5774058577405857,
+          "lift_pct_points": 13.38912133891213
+        },
+        "BANK_TIMEOUT": {
+          "baseline_rate": 0.6217008797653959,
+          "ml_rate": 0.7155425219941349,
+          "lift_pct_points": 9.384164222873903
+        },
+        "CARD_EXPIRED": {
+          "baseline_rate": 0.5992779783393501,
+          "ml_rate": 0.37906137184115524,
+          "lift_pct_points": -22.02166064981949
+        },
+        "CHECKOUT_ABANDONED": {
+          "baseline_rate": 0.635593220338983,
+          "ml_rate": 0.3898305084745763,
+          "lift_pct_points": -24.576271186440675
+        },
+        "GATEWAY_TIMEOUT": {
+          "baseline_rate": 0.64453125,
+          "ml_rate": 0.73828125,
+          "lift_pct_points": 9.375
+        },
+        "INSUFFICIENT_FUNDS": {
+          "baseline_rate": 0.5188916876574308,
+          "ml_rate": 0.49370277078085645,
+          "lift_pct_points": -2.518891687657432
+        },
+        "INVALID_PAYMENT_DETAILS": {
+          "baseline_rate": 0.6643109540636042,
+          "ml_rate": 0.4734982332155477,
+          "lift_pct_points": -19.08127208480565
+        },
+        "NETWORK_ERROR": {
+          "baseline_rate": 0.6013513513513513,
+          "ml_rate": 0.6858108108108109,
+          "lift_pct_points": 8.445945945945954
+        },
+        "PAYMENT_METHOD_DECLINED": {
+          "baseline_rate": 0.32320441988950277,
+          "ml_rate": 0.5193370165745856,
+          "lift_pct_points": 19.613259668508288
+        },
+        "TEMPORARY_BANK_ERROR": {
+          "baseline_rate": 0.5463258785942492,
+          "ml_rate": 0.6932907348242812,
+          "lift_pct_points": 14.696485623003197
+        }
+      },
+      "by_payment_method": {
+        "CARD": {
+          "baseline": 0.5436793422404933,
+          "ml": 0.5488180883864338
+        },
+        "UPI": {
+          "baseline": 0.5569715142428786,
+          "ml": 0.5794602698650675
+        },
+        "WALLET": {
+          "baseline": 0.4977578475336323,
+          "ml": 0.547085201793722
+        },
+        "NETBANKING": {
+          "baseline": 0.5872340425531914,
+          "ml": 0.5893617021276596
+        }
+      },
+      "by_customer_segment": {
+        "RELIABLE": {
+          "baseline": 0.6514047866805411,
+          "ml": 0.46930280957336107
+        },
+        "NORMAL": {
+          "baseline": 0.5343968095712861,
+          "ml": 0.5902293120638086
+        },
+        "HIGH_VALUE": {
+          "baseline": 0.6094890510948905,
+          "ml": 0.5656934306569343
+        },
+        "OCCASIONAL_FAILURE": {
+          "baseline": 0.4263565891472868,
+          "ml": 0.6992248062015504
+        },
+        "LOW_FREQUENCY": {
+          "baseline": 0.4700854700854701,
+          "ml": 0.48717948717948717
+        }
+      },
+      "by_amount_band": {
+        "INR_100_1000": {
+          "baseline": 0.5395569620253164,
+          "ml": 0.560126582278481
+        },
+        "INR_25001_PLUS": {
+          "baseline": 0.3333333333333333,
+          "ml": 0.8333333333333334
+        },
+        "INR_1001_5000": {
+          "baseline": 0.5568258238063215,
+          "ml": 0.5696032279757902
+        },
+        "INR_5001_25000": {
+          "baseline": 0.6049382716049383,
+          "ml": 0.6008230452674898
+        }
+      }
+    }
+  },
+  "phase_6h_explainability": {
+    "top_positive_features": [
+      "observed_action_HUMAN_REVIEW",
+      "human_review_required",
+      "failure_reason_INVALID_PAYMENT_DETAILS",
+      "observed_action_RETRY",
+      "failure_reason_CARD_EXPIRED"
+    ],
+    "top_negative_features": [
+      "observed_action_NO_ACTION",
+      "failure_reason_AMBIGUOUS_FAILURE",
+      "failure_reason_GATEWAY_TIMEOUT",
+      "failure_reason_TEMPORARY_BANK_ERROR",
+      "failure_reason_NETWORK_ERROR"
+    ],
+    "sample_decision": {
+      "selected_action": "HUMAN_REVIEW",
+      "predicted_probability": 0.6266,
+      "expected_recovery_value": 321.78,
+      "runner_up_action": "PAYMENT_LINK",
+      "runner_up_expected_value": 290.28,
+      "decision_reasons": [
+        "Predicted recovery probability for HUMAN_REVIEW is 62.7%.",
+        "Expected recovered revenue under HUMAN_REVIEW is INR 321.78.",
+        "Outranked next-best action (PAYMENT_LINK) by +INR 31.50 expected value (++6.1% probability difference)."
+      ],
+      "context_factors": {
+        "failure_reason": "PAYMENT_METHOD_DECLINED",
+        "payment_method": "CARD",
+        "customer_segment": "OCCASIONAL_FAILURE",
+        "retry_count": 0,
+        "amount_at_risk": 513.54,
+        "historical_success_rate": 0.4
+      },
+      "disclaimer": "Explanation reflects synthetic simulator probability relationships and does not represent production real-world payment causality."
+    }
+  }
+}

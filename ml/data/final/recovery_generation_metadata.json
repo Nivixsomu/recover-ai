@@ -1,0 +1,27 @@
+{
+  "simulator": "recovery-simulator-v2",
+  "seed": 20260401,
+  "config": {
+    "seed": 20260401,
+    "num_cases": 20000,
+    "num_customers": 4000,
+    "train_cases": 14000,
+    "validation_cases": 3000,
+    "test_cases": 3000,
+    "train_start": "2025-01-01T00:00:00",
+    "train_end": "2025-09-30T23:59:59",
+    "validation_start": "2025-10-01T00:00:00",
+    "validation_end": "2025-11-15T23:59:59",
+    "test_start": "2025-11-16T00:00:00",
+    "test_end": "2025-12-31T23:59:59",
+    "max_retry_count": 2,
+    "automatic_action_amount_limit": 25000.0,
+    "human_review_amount_threshold": 50000.0,
+    "human_review_retry_count_threshold": 3,
+    "human_review_previous_failures_threshold": 20,
+    "low_value_no_action_threshold": 300.0,
+    "cooldown_hours": 24.0,
+    "version": "recovery-simulator-v2"
+  },
+  "input_datasets": "None; controlled synthetic generation only"
+}

@@ -1,0 +1,19 @@
+{
+  "model": "HistGradientBoostingClassifier",
+  "validation_metrics": {
+    "accuracy": 0.67,
+    "precision": 0.6540567446490791,
+    "recall": 0.8166563082660038,
+    "f1": 0.7263681592039801,
+    "roc_auc": 0.7196867101347159,
+    "pr_auc": 0.7146473588584057,
+    "brier_score": 0.2063696420726119,
+    "log_loss": 0.597848828565387,
+    "ece": 0.017323611485153927,
+    "mean_predicted_prob": 0.5226900004474493,
+    "observed_success_rate": 0.5363333333333333,
+    "total_amount_at_risk": 6581966.01,
+    "expected_recovered_revenue": 3452325.9848087775,
+    "observed_recovered_revenue": 3669382.34
+  }
+}

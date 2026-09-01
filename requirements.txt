@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-dotenv
+pytest
+httpx
+pandas
+scikit-learn
+openpyxl
+xlrd

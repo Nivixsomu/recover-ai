@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+pip-wheel-metadata/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Testing and coverage
+.pytest_cache/
+pytest-cache-files-*/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Common ML temporary and cache files
+.cache/
+wandb/
+mlruns/
+lightning_logs/
+tensorboard/
+*.ckpt
+*.pth
+*.pt
+*.onnx
+
+# Locally downloaded external datasets (keep documentation and metadata versionable)
+ml/data/external/*.zip
+ml/data/external/*.csv
+ml/data/external/*.tsv
+ml/data/external/*.json
+ml/data/external/*.xlsx
+ml/data/external/*.xls
+ml/data/external/*.parquet
+
+# Reproducible generated datasets (retain small metadata/schema files)
+ml/data/processed/*.csv
+ml/data/final/*.csv
