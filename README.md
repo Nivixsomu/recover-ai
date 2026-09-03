@@ -82,7 +82,7 @@ The Policy Engine enforces deterministic business rules on ML recommendations:
 * **Retry Limit (`ERR_RETRY_LIMIT_EXCEEDED`):** Maximum 2 automatic retries.
 * **Cooldown Guardrail (`ERR_COOLDOWN_NOT_MET`):** Prohibits actions within 24h of previous attempt.
 * **Autonomy Amount Cap (`ERR_AMOUNT_EXCEEDS_AUTONOMY_LIMIT`):** Automatically routes tickets > ₹25,000 to `HUMAN_REVIEW`.
-* **Customer Error Rerouting (`ERR_NON_RETRYABLE_FAILURE`):** Blocks `RETRY` on `CARD_EXPIRED` or `INSUFFICIENT_FUNDS` and reroutes to `PAYMENT_LINK`.
+* **Customer Error Rerouting (`ERR_NON_RETRYABLE_FAILURE`):** Blocks `RETRY` on `CARD_EXPIRED` or `INSUFFICIENT_FUNDS` and reroutes to a customer-action recovery path.
 * **Human Review Escalation:** Low-value tickets without escalation criteria are blocked from expensive human labor and fall back to automated digital actions.
 
 ---
