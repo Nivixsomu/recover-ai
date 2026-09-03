@@ -71,13 +71,10 @@ E-commerce and SaaS merchants lose between **5% to 15% of gross revenue** to fai
 * **69 Transformed Dimensions:** Train-fitted scaling (`StandardScaler`), log-transforms (`log1p`), one-hot encodings, and boolean integer mappings.
 * **Champion Model:** `HistGradientBoostingClassifier` with **Sigmoid (Platt) probability calibration** (`Brier Score = 0.2060`, `ECE = 0.0164`).
 * **Action Candidate Matrix:** Expands any single transaction into 5 candidate feature vectors: `RETRY`, `REMINDER`, `PAYMENT_LINK`, `HUMAN_REVIEW`, `NO_ACTION`.
-- **Expected-Value Optimization:**
 
-  $$
-  \mathbb{E}[V(X,a)] = \hat{\mathbb{P}}(\text{recovery success} \mid X,a) \times \text{amount at risk}
-  $$
+* **Expected-Value Optimization:**
 
----
+  Expected Value = Recovery Probability × Amount at Risk
 
 ## 4. Policy Engine & Safety Guardrails
 
@@ -95,12 +92,12 @@ The Policy Engine enforces deterministic business rules on ML recommendations:
 Evaluated on the 3,000 held-out test cohort from `recovery-simulator-v2` (Seed: `20260401`):
 
 | Metric | Baseline Heuristic | RecoverAI ML + Policy | Net Lift |
-|---|---:|---:|---:|
-| **Total Amount at Risk** | ₹6,073,213.32 | ₹6,073,213.32 | — |
-| **Recovered Revenue** | ₹3,422,581.38 | **₹3,531,916.62** | **+₹109,335.24** |
-| **Recovery Rate** | 55.30% | **56.87%** | **+1.57% points** |
-| **Relative Revenue Gain** | — | — | **+3.19% lift** |
-| **Oracle Potential Ceiling** | — | ₹4,246,431.60 (69.17%) | — |
+|:---|---:|---:|---:|
+| Total Amount at Risk | ₹6,073,213.32 | ₹6,073,213.32 | — |
+| Recovered Revenue | ₹3,422,581.38 | ₹3,531,916.62 | +₹109,335.24 |
+| Recovery Rate | 55.30% | 56.87% | +1.57 percentage points |
+| Relative Revenue Gain | — | — | +3.19% lift |
+| Oracle Potential Ceiling | — | ₹4,246,431.60 (69.17%) | — |
 
 > [!NOTE]
 > **Synthetic Data Disclaimer:** These figures reflect controlled, counterfactual simulation dynamics in `recovery-simulator-v2` and do not represent live production merchant results.
@@ -148,9 +145,9 @@ python -m pytest
 
 1. **Open Dashboard (`http://localhost:8000`):** Review top-level KPIs and synthetic lift metrics.
 2. **Scenario A (Transient Timeout):** Select "Scenario A", click **Dry Run**, and observe ML ranking `RETRY` at 64.3% probability with policy approval.
-3. **Scenario B (Insufficient Funds):** Select "Scenario B" and observe the PolicyEngine blocking `RETRY` due to non-retryable customer failure, routing instead to `PAYMENT_LINK`.
+3. **Scenario B (Insufficient Funds):** Select "Scenario B" and observe the PolicyEngine blocking `RETRY` due to non-retryable customer failure (`ERR_NON_RETRYABLE_FAILURE`), routing instead to `REMINDER`.
 4. **Scenario C (High Value ₹75k):** Select "Scenario C" and observe automatic autonomy limits routing the case to `HUMAN_REVIEW` (enqueuing `TICKET-XXXX`).
-5. **Scenario D (Max Retries):** Select "Scenario D" (retry_count = 2) and observe policy blocking `RETRY` (`ERR_RETRY_LIMIT_EXCEEDED`) and falling back to `PAYMENT_LINK`.
+5. **Scenario D (Max Retries):** Select "Scenario D" (`retry_count = 2`) and observe the PolicyEngine blocking `RETRY` (`ERR_RETRY_LIMIT_EXCEEDED`) and routing the case to the customer-action recovery path (`REMINDER`).
 6. **Execution & Audit Trail:** Click **Execute (Razorpay Test Mode)** to generate a live test order/link and inspect the chronological SQLite audit trail.
 
 ---
@@ -198,7 +195,7 @@ recover-ai/
 ## 10. Known Limitations & Future Work
 
 * **Simulated Counterfactuals:** True production deployment will require online multi-armed bandit (MAB) / contextual bandit exploration to update conversion priors.
-* **Labor Cost Modeling:** Incorporating agent hourly wage into the objective function: $\mathbb{E}[\text{Net}] = \hat{\mathbb{P}} \times \text{Amount} - \text{Labor Cost}$.
+* **Labor Cost Modeling:** Incorporating agent hourly wage into the objective function: E[Net] = P(recovery) × Amount − Labor Cost.
 * **Multi-Channel Dispatch:** Integrating WhatsApp Business API and SMS webhooks alongside Razorpay Payment Links.
 
 ---
