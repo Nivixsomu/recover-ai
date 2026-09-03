@@ -146,7 +146,7 @@ python -m pytest
 1. **Open Dashboard (`http://localhost:8000`):** Review top-level KPIs and synthetic lift metrics.
 2. **Scenario A (Transient Timeout):** Select "Scenario A", click **Dry Run**, and observe ML ranking `RETRY` at 64.3% probability with policy approval.
 3. **Scenario B (Insufficient Funds):** Select "Scenario B" and observe the PolicyEngine blocking `RETRY` due to non-retryable customer failure (`ERR_NON_RETRYABLE_FAILURE`), routing instead to `REMINDER`.
-4. **Scenario C (High Value ₹75k):** Select "Scenario C" and observe automatic autonomy limits routing the case to `HUMAN_REVIEW` (enqueuing `TICKET-XXXX`).
+4. **Scenario C (High Value ₹75k):** Select "Scenario C" and observe automatic autonomy limits routing the case to `HUMAN_REVIEW` (enqueuing `TICKET-GHVAL-03`).
 5. **Scenario D (Max Retries):** Select "Scenario D" (`retry_count = 2`) and observe the PolicyEngine blocking `RETRY` (`ERR_RETRY_LIMIT_EXCEEDED`) and routing the case to the customer-action recovery path (`REMINDER`).
 6. **Execution & Audit Trail:** Click **Execute (Razorpay Test Mode)** to generate a live test order/link and inspect the chronological SQLite audit trail.
 
