@@ -71,8 +71,11 @@ E-commerce and SaaS merchants lose between **5% to 15% of gross revenue** to fai
 * **69 Transformed Dimensions:** Train-fitted scaling (`StandardScaler`), log-transforms (`log1p`), one-hot encodings, and boolean integer mappings.
 * **Champion Model:** `HistGradientBoostingClassifier` with **Sigmoid (Platt) probability calibration** (`Brier Score = 0.2060`, `ECE = 0.0164`).
 * **Action Candidate Matrix:** Expands any single transaction into 5 candidate feature vectors: `RETRY`, `REMINDER`, `PAYMENT_LINK`, `HUMAN_REVIEW`, `NO_ACTION`.
-* **Expected-Value Optimization:**
-  $$\mathbb{E}[V(X, a)] = \hat{\mathbb{P}}(\text{recovery\_success} \mid X, a) \times \text{amount\_at\_risk}$$
+- **Expected-Value Optimization:**
+
+  $$
+  \mathbb{E}[V(X,a)] = \hat{\mathbb{P}}(\text{recovery success} \mid X,a) \times \text{amount at risk}
+  $$
 
 ---
 
@@ -92,7 +95,7 @@ The Policy Engine enforces deterministic business rules on ML recommendations:
 Evaluated on the 3,000 held-out test cohort from `recovery-simulator-v2` (Seed: `20260401`):
 
 | Metric | Baseline Heuristic | RecoverAI ML + Policy | Net Lift |
-|---|---|---|---|
+|---|---:|---:|---:|
 | **Total Amount at Risk** | ₹6,073,213.32 | ₹6,073,213.32 | — |
 | **Recovered Revenue** | ₹3,422,581.38 | **₹3,531,916.62** | **+₹109,335.24** |
 | **Recovery Rate** | 55.30% | **56.87%** | **+1.57% points** |
